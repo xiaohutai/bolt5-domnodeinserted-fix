@@ -12,7 +12,7 @@ class Widget extends BaseWidget implements TwigAwareInterface
     protected $name = 'DomNodeInsertedFix';
     protected $target = Target::END_OF_HEAD;
     protected $priority = 300;
-    protected $template = '@domnodeinsertedfix/widget.html.twig';
+    protected $template = '@domnodeinsertedfix/domnodeinsertedfix-widget.html.twig';
     protected $zone = RequestZone::BACKEND;
     protected $cacheDuration = 0;
 
