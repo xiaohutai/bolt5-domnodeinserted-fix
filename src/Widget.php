@@ -18,6 +18,10 @@ class Widget extends BaseWidget implements TwigAwareInterface
 
     public function run(array $params = []): ?string
     {
+        // Hack to invoke private `addTwigLoader` method.
+        parent::run([]);
+
+        // Rendering through `run` adds an unwanted wrapper div.
         return $this->getTwig()->render($this->template);
     }
 
