@@ -1,0 +1,27 @@
+{# ---
+Use this widget to manually add assets (JS/CSS) fin the Bolt back-end.
+- https://developer.chrome.com/blog/mutation-events-deprecation
+- https://chromestatus.com/feature/5083947249172480
+- https://github.com/mfreed7/mutation-events-polyfill
+
+Unfortunately, the polyfill does not work in our case.
+<script src="{{ asset('assets/mutation_events.min.js') }}"></script>
+--- #}
+<script>
+    const callback = (mutationList, observer) => {
+        for (const mutation of mutationList) {
+            if (mutation.type === "childList") {
+                let nodes = Array.prototype.slice.call(mutation.addedNodes);
+                nodes.forEach(node => {
+                    if (node && node.classList && node.classList.contains('collection-item')) {
+                        initArticles();
+                        initRedactors();
+                    }
+                })
+            }
+        }
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(document, { attributes: false, childList: true, subtree: true });
+    // observer.disconnect();
+</script>
