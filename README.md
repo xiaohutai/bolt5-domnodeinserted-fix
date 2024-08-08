@@ -9,7 +9,7 @@ More info:
 
 ## Installation
 ```
-composer install xiaohutai/domnodeinsertedfix
+composer require xiaohutai/domnodeinsertedfix
 ```
 
 
