@@ -8,12 +8,13 @@ Unfortunately, the polyfill does not work in our case.
 <script src="{{ asset('assets/mutation_events.min.js') }}"></script>
 --- #}
 <script>
+(() => {
     const callback = (mutationList, observer) => {
         for (const mutation of mutationList) {
             if (mutation.type === "childList") {
                 let nodes = Array.prototype.slice.call(mutation.addedNodes);
                 nodes.forEach(node => {
-                    if (node && node.classList && node.classList.contains('collection-item')) {
+                    if (node.nodeType === 1 && node.classList && node.classList.contains('collection-item')) {
                         initArticles();
                         initRedactors();
                     }
@@ -24,4 +25,5 @@ Unfortunately, the polyfill does not work in our case.
     const observer = new MutationObserver(callback);
     observer.observe(document, { attributes: false, childList: true, subtree: true });
     // observer.disconnect();
+})();
 </script>
